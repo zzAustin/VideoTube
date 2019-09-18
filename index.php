@@ -12,9 +12,14 @@
 <body>
 	<div id="pageContainer">
 		<div id="mastHeadContainer">
-			<button class="navShowHide">Click Me!</button>
+			<button class="navShowHide" title="Toggle Navigation"> <!--so title attribute works both with button and img, maybe more-->
+				<img src="assets/images/icons/menu.png"></img>
+			</button>
+			<a class="logoContainer" href="index.php">
+				<img src="assets/images/icons/VideoTubeLogo.png" title="logo" alt="Site logo"></img>
+			</a>
 		</div>
-		<div id="sideNavContainer">
+		<div id="sideNavContainer" style="display:none">
 		</div>
 		<div id="mainSectionContainer">
 			<div id="mainContentContainer">
