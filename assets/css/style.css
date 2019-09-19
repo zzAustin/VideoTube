@@ -1,17 +1,21 @@
 html,
-body{
+body {
 	height:100%;
 	padding:0px;
 	margin:0px;
 }
 
-#pageContainer{
+a:hover{
+	text-decoration: none
+}
+
+#pageContainer {
 	width: 100%;
     height: 100%;
     background-color: #fafafa;
 }
 
-#mastHeadContainer{
+#mastHeadContainer {
 	width:100%;
 	height:56px;
 	position:fixed;
@@ -25,7 +29,8 @@ body{
 	align-items: center;
 }
 
-#mastHeadContainer button{
+#mastHeadContainer button:not(.searchButton),
+#mastHeadContainer .rightIcons img{
 	cursor: pointer;
     width: 40px;
     height: 40px;
@@ -35,20 +40,20 @@ body{
     background-color: transparent;
 }
 
-#mastHeadContainer button img{
-	width: 100%;
+#mastHeadContainer button img {
+	width: 100%; 
 }
 
-#mastHeadContainer .logoContainer{
+#mastHeadContainer .logoContainer {
 	width: 150px;
 }
 
-#mastHeadContainer .logoContainer img{
+#mastHeadContainer .logoContainer img {
 	height: 25px;
     margin-left: 8px;
 }
  
-#sideNavContainer{
+#sideNavContainer {
 	width: 240px;
     background-color: #f5f5f5;
     padding-top: 56px; /*this is taken from the height of #mastHeadContainer*/
@@ -59,15 +64,60 @@ body{
     flex-direction: column;
 }
 
-#mainSectionContainer{
+#mainSectionContainer {
 	padding-top: 56px;
 	display: flex;
 }
 
-#mainSectionContainer.leftPadding{
+#mainSectionContainer.leftPadding {
 	padding-left: 240px;
 }
 
-#mainContentContainer{
+#mainContentContainer {
 	padding:10px 30px;
+}
+
+.searchBarContainer {
+	margin: 0 40px;
+    flex: 1; /*for now i think this is saying it this element will take up all available space of the parent, by available means it will not obsure other elements*/
+    display: flex;
+}
+
+#mastHeadContainer .searchBarContainer form {
+    flex: 1;
+    display: flex;
+}
+
+#mastHeadContainer .searchBarContainer .searchBar {
+	flex: 1;
+    max-width: 600px;
+    color: #111; /*font color*/
+    padding: 2px 6px; /*padding for the text*/
+    font-size: 14px;
+    font-weight: 100;
+    border: 1px solid #ccc;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-right: none;
+    height: 32px;
+    box-shadow: #eee 0px 1px 2px 0px inset;
+}
+
+#mastHeadContainer .searchBarContainer .searchButton {
+	height: 32px;
+    width: 65px;
+    border: 1px solid #d3d3d3;
+    background-color: #f8f8f8;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    cursor: pointer;
+}
+
+#mastHeadContainer .searchBarContainer .searchButton img{
+	height: 20px;
+	width: 20px;
+}
+
+#mastHeadContainer .rightIcons{
+	height: 100%;
 }

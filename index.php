@@ -13,11 +13,27 @@
 	<div id="pageContainer">
 		<div id="mastHeadContainer">
 			<button class="navShowHide" title="Toggle Navigation"> <!--so title attribute works both with button and img, maybe more-->
-				<img src="assets/images/icons/menu.png"></img>
+				<img src="assets/images/icons/menu.png">
 			</button>
 			<a class="logoContainer" href="index.php">
-				<img src="assets/images/icons/VideoTubeLogo.png" title="logo" alt="Site logo"></img>
+				<img src="assets/images/icons/VideoTubeLogo.png" title="logo" alt="Site logo">
 			</a>
+			<div class="searchBarContainer">
+				<form action="search.php" method="GET">
+					<input type="text" class="searchBar" name="term" placeholder="Search...">
+					<button class="searchButton">
+						<img src="assets/images/icons/search.png">
+					</button>
+				</form>
+			</div>
+			<div class="rightIcons">
+				<a href="upload.php">
+					<img class="upload" src="assets/images/icons/upload.png">
+				</a>
+				<a href="#">
+					<img src="assets/images/profilePictures/default.png">
+				</a>
+			</div>
 		</div>
 		<div id="sideNavContainer" style="display:none">
 		</div>
