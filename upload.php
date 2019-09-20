@@ -6,15 +6,8 @@ require_once("includes/classes/VideoDetailsFormProvider.php");
 <div class="column">
 
 <?php
-	$formProvider = new VideoDetailsFormProvider();
-	echo $formProvider->createUploadForm(0);
-
-	$query = $con->prepare("SELECT * FROM categories");
-	$query->execute();
-
-	while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-		echo $row["name"] . "<br>";
-	}
+	$formProvider = new VideoDetailsFormProvider($con); // $con is defined in config.php
+	echo $formProvider->createUploadForm();
 ?>
 
 </div>
