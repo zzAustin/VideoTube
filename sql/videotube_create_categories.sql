@@ -42,7 +42,6 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Film & Animation'),
 (2, 'Auto & Vehicles'),
 (3, 'Music'),
-(4, 'Music'),
 (5, 'Pets & Animals'),
 (6, 'Sports'),
 (7, 'Travel & Events'),

@@ -10,15 +10,15 @@
 			$titleInput = $this->createTitleInput();
 			$descriptionInput = $this->createDescriptionInput();
 			$privacyInput = $this->createPrivacyInput();
-			$categoriesInput = $this->createCategoriesInput();
+			$categoryInput = $this->createCategoryInput();
 			$uploadButton = $this->createUploadButton();
 			
-			return "<form action='processing.php' method='POST'>
+			return "<form action='processing.php' method='POST' enctype='multipart/form-data'>
 						$fileInput
 						$titleInput
 						$descriptionInput
 						$privacyInput
-						$categoriesInput
+						$categoryInput
 						$uploadButton
 					</form>";
 		}
@@ -55,12 +55,12 @@
 					</div>"; // <select multiple class='form-control' name='privacyInput'> this will be a multiple select
 		}
 
-		private function createCategoriesInput() {
+		private function createCategoryInput() {
 			$query = $this->con->prepare("SELECT * FROM categories");
 			$query->execute();
 
 			$html = "<div class='form-group'>
-						<select class='form-control' name='privacyInput'>
+						<select class='form-control' name='categoryInput'>
 					";
 
 			while($row = $query->fetch(PDO::FETCH_ASSOC)) {
