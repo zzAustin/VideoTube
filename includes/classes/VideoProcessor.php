@@ -8,8 +8,15 @@ class VideoProcessor{
 
 	public function __construct($con){
 		$this->con = $con;
-		$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg");
-		//$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe"); // austin's note: windows 
+		$osName = php_uname();
+		if (strpos($osName,"Linux") !== false){
+			echo "OS is linux!";
+			$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg");
+		}
+        else{
+        	echo "OS is windows!";
+        	$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe"); // austin's note: windows 
+		}
 	}
 
 	public function upload($videoUploadData){
@@ -27,7 +34,7 @@ class VideoProcessor{
 		if(move_uploaded_file($videoData["tmp_name"], $tempFilePath)){
 			$finalFilePath = $targetDir . uniqid() . ".mp4";
 			if(!$this->insertVideoData($videoUploadData, $finalFilePath)){
-				echo "Insert query failed.\n";
+				echo "Insert query failed./n";
 				return false;
 			}
 
@@ -35,7 +42,7 @@ class VideoProcessor{
 			// max_execution_time=30 changed to max_execution_time=300
 			// upload_max_filesize=128M kept as it is
 			if(!$this->convertVideoToMp4($tempFilePath, $finalFilePath)){
-				echo "Video conversion failed.\n"
+				echo "Video conversion failed./n";
 				return false;
 			}
 
