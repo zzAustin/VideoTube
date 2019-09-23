@@ -136,5 +136,12 @@ class VideoProcessor{
 
 		return true;
 	}
+
+	private function generateThumbnails($filePath){
+
+		$thumbnailSize = "210x118";
+		$numThumbnails = 3;
+		$pathToThumbnail = "uploads/videos/thumbnails";
+	}
 }
 ?>
