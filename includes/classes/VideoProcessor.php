@@ -5,6 +5,7 @@ class VideoProcessor{
 	private $sizeLimit = 50000000; // about 500M
 	private $allowedTypes = array("mp4","flv","webm","mkv","vob","ogv","ogg","avi","wmv","mov","mpeg","mpg");
 	private $ffmpegPath;
+	private $ffprobePath;
 
 	public function __construct($con){
 		$this->con = $con;
@@ -12,10 +13,12 @@ class VideoProcessor{
 		if (strpos($osName,"Linux") !== false){
 			echo "OS is linux!";
 			$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg");
+			$this->ffprobePath = realPath("ffmpeg/bin/ffprobe");
 		}
         else{
         	echo "OS is windows!" . "<br>";
         	$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe"); // austin's note: windows 
+        	$this->ffprobePath = realPath("ffmpeg/bin/ffprobe.exe"); // austin's note: windows 
 		}
 	}
 
@@ -50,6 +53,11 @@ class VideoProcessor{
 
 			if(!$this->deleteFile($tempFilePath)){
 				echo "Failed to delete temporary video file./n";
+				return false;
+			}
+
+			if(!$this->generateThumbnails($finalFilePath)){
+				echo "Failed to generate thumbnails./n";
 				return false;
 			}
 
@@ -142,6 +150,16 @@ class VideoProcessor{
 		$thumbnailSize = "210x118";
 		$numThumbnails = 3;
 		$pathToThumbnail = "uploads/videos/thumbnails";
+
+		$duration = $this->getVideoDuration($filePath);
+
+		echo "video:duration: $duration/n";
+	}
+
+	private function getVideoDuration($filePath){
+		$cmd = "$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath";
+		echo "cmd is: $cmd/n";
+		return shell_exec($cmd);
 	}
 }
 ?>
