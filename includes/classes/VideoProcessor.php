@@ -48,6 +48,11 @@ class VideoProcessor{
 				return false;
 			}
 
+			if(!$this->deleteFile($tempFilePath)){
+				echo "Failed to delete temporary video file./n";
+				return false;
+			}
+
 			echo "File moved successfully." . "<br>";
 			return true;
 		}
@@ -117,6 +122,15 @@ class VideoProcessor{
 				echo $line . "<br>";
 			}
 
+			return false;
+		}
+
+		return true;
+	}
+
+	private function deleteFile($filePath){
+		if(!unlink($filePath)){
+			echo "Could not delete file./n";
 			return false;
 		}
 
