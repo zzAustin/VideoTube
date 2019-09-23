@@ -14,7 +14,7 @@ class VideoProcessor{
 			$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg");
 		}
         else{
-        	echo "OS is windows!";
+        	echo "OS is windows!" . "<br>";
         	$this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe"); // austin's note: windows 
 		}
 	}
@@ -25,9 +25,11 @@ class VideoProcessor{
 
 		$tempFilePath = $targetDir . uniqid() . basename($videoData["name"]);
 		$tempFilePath = str_replace(" ", "_", $tempFilePath);
+		echo "tempFilePath is:" . $tempFilePath . "<br>";
 
 		$isValidData = $this->processData($videoData, $tempFilePath);
 		if(!$isValidData){
+			echo "uploaded video is not valid." . "<br>";
 			return false;
 		}
 
@@ -46,7 +48,11 @@ class VideoProcessor{
 				return false;
 			}
 
-			echo "File moved successfully.";
+			echo "File moved successfully." . "<br>";
+			return true;
+		}
+		else{
+			echo "Failed to move uploade file." . "<br>";
 		}
 		//echo $tempFilePath;
 	}
@@ -56,15 +62,18 @@ class VideoProcessor{
 
 		if(!$this->isValidSize($videoData))
 		{
+			echo "Check size." . "<br>";
 			echo "File too large, can't be more than " . $this->sizeLimit . " byte";
 			return false;
 		} 
 		else if(!$this->isValidType($videoType)){
+			echo "Check type." . "<br>";
 			echo "Invalid file type";
 			return false;
 		}
 		else if(!$this->hasError($videoData)){
-			echo "Error code: " . $videoData["error"];
+			echo "Check error." . "<br>";
+			echo "Error code: " . $videoData["error"] . "<br>";
 			return false;
 		}
 

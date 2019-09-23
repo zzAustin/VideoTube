@@ -3,8 +3,8 @@
 
 				Hello, everyone!
 <?php
-	echo php_uname();
-	echo PHP_OS;
+	echo php_uname() . "<br>";
+	echo PHP_OS . "<br>";
 ?>
 
 
