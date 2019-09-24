@@ -28,6 +28,8 @@ else{
 	echo "upload did not succeed." . "<br>";
 }
 
-
 // 3) check if upload was sucessful
+if($wasSuccessful){
+	echo "upload successful!";
+}
 ?>

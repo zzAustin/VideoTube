@@ -39,7 +39,7 @@ class VideoProcessor{
 		if(move_uploaded_file($videoData["tmp_name"], $tempFilePath)){
 			$finalFilePath = $targetDir . uniqid() . ".mp4";
 			if(!$this->insertVideoData($videoUploadData, $finalFilePath)){
-				echo "Insert query failed./n";
+				echo "Insert query failed.\n";
 				return false;
 			}
 
@@ -47,17 +47,17 @@ class VideoProcessor{
 			// max_execution_time=30 changed to max_execution_time=300
 			// upload_max_filesize=128M kept as it is
 			if(!$this->convertVideoToMp4($tempFilePath, $finalFilePath)){
-				echo "Video conversion failed./n";
+				echo "Video conversion failed.\n";
 				return false;
 			}
 
 			if(!$this->deleteFile($tempFilePath)){
-				echo "Failed to delete temporary video file./n";
+				echo "Failed to delete temporary video file.\n";
 				return false;
 			}
 
 			if(!$this->generateThumbnails($finalFilePath)){
-				echo "Failed to generate thumbnails./n";
+				echo "Failed to generate thumbnails.\n";
 				return false;
 			}
 
@@ -68,6 +68,8 @@ class VideoProcessor{
 			echo "Failed to move uploade file." . "<br>";
 		}
 		//echo $tempFilePath;
+
+		return true;
 	}
 
 	private function processData($videoData, $filePath){
@@ -126,6 +128,7 @@ class VideoProcessor{
 		exec($cmd, $outputLog, $returnCode);
 
 		if($returnCode != 0){
+			echo "Error code detected in video conversion." . "<br>";
 			foreach($outputLog as $line){
 				echo $line . "<br>";
 			}
@@ -138,7 +141,7 @@ class VideoProcessor{
 
 	private function deleteFile($filePath){
 		if(!unlink($filePath)){
-			echo "Could not delete file./n";
+			echo "Could not delete file.\n";
 			return false;
 		}
 
@@ -155,16 +158,49 @@ class VideoProcessor{
 		$videoId = $this->con->lastInsertId(); // so you have to make sure that the last sql op is the insertion of new video
 		
 		$this->updateDuration($duration, $videoId);
+
+		for($num = 1; $num <= $numThumbnails; $num++){
+			$imageName = uniqid() . ".jpg";
+			$interval = ($duration * 0.8) / $numThumbnails * $num; // apply a 0.8 deviation for the purpose of avoiding things like credit and stuff
+			$fullThumbnailPath = "$pathToThumbnail/$videoId-$imageName";
+
+			$cmd = "$this->ffmpegPath -i $filePath -ss $interval -s $thumbnailSize -vframes 1 $fullThumbnailPath 2>&1";
+			$outputLog = array();
+			exec($cmd, $outputLog, $returnCode);
+
+			if($returnCode != 0){
+				echo "Error code detected in thumbnail generation." . "<br>";
+				foreach($outputLog as $line){
+					echo $line . "<br>";
+				}
+			}
+
+			$selected = $num == 1 ? 1  : 0;
+
+			$query = $this->con->prepare("INSERT INTO thumbnails(videoid, filePath, selected)
+										 VALUES(:videoid, :filePath, :selected)");
+			$query->bindParam(":videoid", $videoId);
+			$query->bindParam(":filePath", $fullThumbnailPath);
+			$query->bindParam(":selected", $selected);
+
+			$success = $query->execute();
+
+			if(!$success){
+				echo "Error inserting thumbnails into database.\n";
+				return false;
+			} 
+		}
+
+		return true;
 	}
 
 	private function getVideoDuration($filePath){
 		$cmd = "$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath";
-		echo "cmd is: $cmd/n";
-		return shell_exec($cmd); // this actually returns a string
+		echo "cmd is: $cmd\n";
+		return (int)shell_exec($cmd); // this actually returns a string
 	}
 
 	private function updateDuration($duration, $videoId){
-		$duration = (int)$duration;
 		// change the format in seconds to hour:min:sec
 		$hours = floor($duration / 3600);
 		$mins = floor(($duration - $hours * 3600) / 60);
