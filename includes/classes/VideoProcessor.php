@@ -163,7 +163,6 @@ class VideoProcessor{
 			$imageName = uniqid() . ".jpg";
 			$interval = ($duration * 0.8) / $numThumbnails * $num; // apply a 0.8 deviation for the purpose of avoiding things like credit and stuff
 			$fullThumbnailPath = "$pathToThumbnail/$videoId-$imageName";
-
 			$cmd = "$this->ffmpegPath -i $filePath -ss $interval -s $thumbnailSize -vframes 1 $fullThumbnailPath 2>&1";
 			$outputLog = array();
 			exec($cmd, $outputLog, $returnCode);
@@ -182,6 +181,8 @@ class VideoProcessor{
 			$query->bindParam(":videoid", $videoId);
 			$query->bindParam(":filePath", $fullThumbnailPath);
 			$query->bindParam(":selected", $selected);
+
+			echo "SQL params:" . "$videoId\n" . "$fullThumbnailPath\n" . "$selected\n";
 
 			$success = $query->execute();
 
