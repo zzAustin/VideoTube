@@ -1,19 +1,24 @@
 <?php 
 require_once("includes/config.php");
+require_once("includes/classes/Account.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/FormSanitizer.php");
 
-function sanitizeFormString($inputText){
-	$inputText = strip_tags($inputText);
-	$inputText = str_replace(" ", "", $inputText);
-	//$inputText = trim($inputText);// use trim if you allow space in the middle
-	$inputText = strtolower($inputText);
-	$inputText = ucfirst($inputText);
-
-	return $inputText;
-}
+$account = new Account($con);
 
 if(isset($_POST["submitButton"])){
-	$firstName = sanitizeFormString($_POST["firstName"]);
-	echo $firstName;
+	$firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]);
+	$lastName = FormSanitizer::sanitizeFormString($_POST["lastName"]);
+
+	$username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+
+	$email = FormSanitizer::sanitizeFormEmail($_POST["email"]);
+	$email2 = FormSanitizer::sanitizeFormEmail($_POST["email2"]);
+
+	$password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+	$password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
+
+	$account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
 }
 ?>
 
@@ -39,6 +44,9 @@ if(isset($_POST["submitButton"])){
 			
 			<div class="loginForm">
 				<form action="signUp.php" method="POST">
+
+					<?php echo $account->getError(Constants::$firstNameCharacters);?> <!--error message after submission-->
+
 					<input type="text" name="firstName" placeholder="First Name" autocomplete="off" required>
 					<input type="text" name="lastName" placeholder="Last Name" autocomplete="off" required>
 					<input type="text" name="username" placeholder="User Name" autocomplete="off" required>
