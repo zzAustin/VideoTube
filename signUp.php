@@ -23,14 +23,21 @@ require_once("includes/config.php");
 			</div>
 			
 			<div class="loginForm">
-				<form action="signIn.php">
-					<input type="text" name="username" placeholder="Username" required autocomplete="off">
-					<input type="password" name="password" placeholder="Password" required>
+				<form action="signUp.php">
+					<input type="text" name="firstName" placeholder="First Name" autocomplete="off" required>
+					<input type="text" name="lastName" placeholder="Last Name" autocomplete="off" required>
+					<input type="text" name="username" placeholder="User Name" autocomplete="off" required>
+
+					<input type="email" name="email" placeholder="Email" autocomplete="off" required>
+					<input type="email" name="email2" placeholder="Confirm email" autocomplete="off" required>
+					<input type="password" name="password" placeholder="Password" autocomplete="off" required>
+					<input type="password" name="password2" placeholder="Confirm password" autocomplete="off" required>
+
 					<input type="submit" name="submitButton" value="SUBMIT">
 				</form>
 			</div>
 
-			<a class="signInMessage" href="signUp.php">Need an account? Sign up here!</a>
+			<a class="signInMessage" href="signIn.php">Already have an account? Sign in here!</a>
 		</div>
 	</div>
 
