@@ -1,5 +1,20 @@
 <?php 
 require_once("includes/config.php");
+
+function sanitizeFormString($inputText){
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	//$inputText = trim($inputText);// use trim if you allow space in the middle
+	$inputText = strtolower($inputText);
+	$inputText = ucfirst($inputText);
+
+	return $inputText;
+}
+
+if(isset($_POST["submitButton"])){
+	$firstName = sanitizeFormString($_POST["firstName"]);
+	echo $firstName;
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +38,7 @@ require_once("includes/config.php");
 			</div>
 			
 			<div class="loginForm">
-				<form action="signUp.php">
+				<form action="signUp.php" method="POST">
 					<input type="text" name="firstName" placeholder="First Name" autocomplete="off" required>
 					<input type="text" name="lastName" placeholder="Last Name" autocomplete="off" required>
 					<input type="text" name="username" placeholder="User Name" autocomplete="off" required>

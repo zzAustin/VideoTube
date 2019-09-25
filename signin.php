@@ -23,7 +23,7 @@ require_once("includes/config.php");
 			</div>
 			
 			<div class="loginForm">
-				<form action="signIn.php">
+				<form action="signIn.php" method="POST">
 					<input type="text" name="username" placeholder="Username" required autocomplete="off">
 					<input type="password" name="password" placeholder="Password" required>
 					<input type="submit" name="submitButton" value="SUBMIT">
