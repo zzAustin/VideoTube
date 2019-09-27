@@ -1,10 +1,14 @@
 <?php require_once("includes/header.php"); ?>
 				
-
-				Hello, everyone!
 <?php
-	echo php_uname() . "<br>";
-	echo PHP_OS . "<br>";
+	/*echo php_uname() . "<br>";
+	echo PHP_OS . "<br>";*/
+	if(isset($_SESSION["userLoggedIn"])){
+		echo "Logged in as " . $userLoggedInObj->getName(); // $userLoggedInObj is defined in header.php
+	}
+	else{
+		echo "Not logged in";
+	}
 ?>
 
 

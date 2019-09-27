@@ -8,15 +8,32 @@ class Account{
 		$this->con = $con;
 	}
 
+	public function login($un, $pwd){
+		$pwd = hash("sha512", $pwd);
+
+		$query = $this->con->prepare("SELECT * FROM users WHERE username=:un AND password=:pwd");
+		$query->bindParam(":un", $un);
+		$query->bindParam(":pwd", $pwd);
+		$query->execute();
+
+		if($query->rowCount() == 1){
+			return true;
+		}
+		else{
+			array_push($this->errorArray,Constants::$loginFailed);
+			return false;
+		}
+	}
+
 	public function register($fn, $ln, $un, $em, $em2, $pwd, $pwd2){
 		$this->validateFirstName($fn);
 		$this->validateLastName($ln);
-		$this->validateUsername($ln);
+		$this->validateUsername($un);
 		$this->validateEmails($em, $em2);
 		$this->validatePasswords($pwd, $pwd2);
 
 		if(empty($this->errorArray)){
-			$this->insertUserDetails($fn, $ln, $un, $em, $pwd);
+			return $this->insertUserDetails($fn, $ln, $un, $em, $pwd);
 		}
 		else{
 			return false;
@@ -24,7 +41,19 @@ class Account{
 	}
 
 	public function insertUserDetails($fn, $ln, $un, $em, $pwd){
-		return true;
+		$pwd = hash("sha512", $pwd);
+		$profilePic = "assets/images/profilePictures/default.png";
+
+		$query = $this->con->prepare("INSERT INTO users (firstName, lastName, username, email, password, profilePic)
+									 VALUES (:fn, :ln, :un, :em, :pwd, :pic)");
+		$query->bindParam(":fn", $fn);
+		$query->bindParam(":ln", $ln);
+		$query->bindParam(":un", $un);
+		$query->bindParam(":em", $em);
+		$query->bindParam(":pwd", $pwd);
+		$query->bindParam(":pic", $profilePic);
+
+		return $query->execute();
 	}
 
 	private function validateFirstName($fn){
@@ -86,6 +115,7 @@ class Account{
 	}
 
 	public function getError($error){
+		//echo "array:" . "$this->errorArray";
 		if(in_array($error, $this->errorArray)){
 			return "<span class='errorMessage'>$error</span>";
 		}

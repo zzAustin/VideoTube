@@ -23,6 +23,8 @@ if(isset($_POST["submitButton"])){
 	if($wasSuccessful){
 		// SUCCESS
 		// Redirect user to index page
+		$_SESSION["userLoggedIn"] = $username;
+		header("Location: index.php");
 	}
 }
 
