@@ -57,6 +57,26 @@ class Video{
 		return $this->sqlData["duration"];
 	}
 
+	public function getLikes() {
+		$query = $this->con->prepare("SELECT count(*) as 'count' FROM likes WHERE videoId = :videoId");
+		$query->bindParam(":videoId", $videoId);
+		$videoId = $this->getId();
+		$query->execute();
+
+		$data = $query->fetch(PDO::FETCH_ASSOC);
+		return $data["count"];
+	}
+
+	public function getDislikes() {
+		$query = $this->con->prepare("SELECT count(*) AS 'count' FROM dislikes WHERE videoId = :videoId");
+		$query->bindParam(":videoId", $videoId);
+		$videoId = $this->getId();
+		$query->execute();
+
+		$data = $query->fetch(PDO::FETCH_ASSOC);
+		return $data["count"];
+	}
+
 	public function incrementViews(){
 		$query = $this->con->prepare("UPDATE videos SET views=views+1 WHERE id=:id");
 		$query->bindParam(":id", $videoId);
