@@ -86,5 +86,9 @@ class Video{
 
 		$this->sqlData["views"] += 1;
 	}
+
+	public function like(){
+		return "sandwitches.";
+	}
 }
 ?>
