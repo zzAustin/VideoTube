@@ -77,7 +77,7 @@ class Video{
 		return $data["count"];
 	}
 
-	public function incrementViews(){
+	public function incrementViews() {
 		$query = $this->con->prepare("UPDATE videos SET views=views+1 WHERE id=:id");
 		$query->bindParam(":id", $videoId);
 		$videoId = $this->getId();
@@ -87,8 +87,26 @@ class Video{
 		$this->sqlData["views"] += 1;
 	}
 
-	public function like(){
-		return "sandwitches.";
+	public function like() {
+		$id = $this->getId();
+		$username = $_SESSION["userLoggedIn"];
+
+		$query = $this->con->prepare("SELECT * FROM likes WHERE username=:username AND videoId=:videoId");
+		$query->bindParam(":username", $username);
+		$query->bindParam(":videoId", $id);
+		$query->execute();
+
+		if($query->rowCount() > 0) {
+			// user has already liked
+			echo "liked";
+		}
+		else {
+			// user has not liked
+			$query = $this->con->prepare("INSERT INTO likes(username, videoId) VALUES(:username, :videoId)");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":videoId", $id);
+			$query->execute();
+		}
 	}
 }
 ?>
