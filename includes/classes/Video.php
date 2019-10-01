@@ -46,7 +46,7 @@ class Video{
 	}
 
 	public function getUploadDate() {
-		return $this->sqlData["uploadeDate"];
+		return $this->sqlData["uploadDate"];
 	}
 
 	public function getViews() {
@@ -91,30 +91,108 @@ class Video{
 		$id = $this->getId();
 		$username = $_SESSION["userLoggedIn"];
 
-		$query = $this->con->prepare("SELECT * FROM likes WHERE username=:username AND videoId=:videoId");
-		$query->bindParam(":username", $username);
-		$query->bindParam(":videoId", $id);
-		$query->execute();
-
-		if($query->rowCount() > 0) {
+		if($this->wasLikedBy()) {
 			// user has already liked
 			$query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND videoId=:videoId");
 			$query->bindParam(":username", $username);
 			$query->bindParam(":videoId", $id);
 			$query->execute();
+
+			// return data count change to the called(mostly ajax caller js)
+			$result = array(
+				"likes" => -1,
+				"dislikes" => 0
+			);
+
+			return json_encode($result);
 		}
 		else {
 			// user has not liked
-			$query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND videoId=:videoId");
+			$query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username AND videoId=:videoId");
 			$query->bindParam(":username", $username);
 			$query->bindParam(":videoId", $id);
 			$query->execute();
+			$count = $query->rowCount(); // how many rows are deleted
 
 			$query = $this->con->prepare("INSERT INTO likes(username, videoId) VALUES(:username, :videoId)");
 			$query->bindParam(":username", $username);
 			$query->bindParam(":videoId", $id);
 			$query->execute();
+
+						// return data count change to the called(mostly ajax caller js)
+			$result = array(
+				"likes" => 1,
+				"dislikes" => 0 - $count
+			);
+
+			return json_encode($result);
 		}
+	}
+
+	public function dislike() {
+		$id = $this->getId();
+		$username = $_SESSION["userLoggedIn"];
+
+		if($this->wasDislikedBy()) {
+			// user has already dsiliked
+			$query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username AND videoId=:videoId");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":videoId", $id);
+			$query->execute();
+
+			// return data count change to the called(mostly ajax caller js)
+			$result = array(
+				"likes" => 0,
+				"dislikes" => -1
+			);
+
+			return json_encode($result);
+		}
+		else {
+			// user has not disliked
+			$query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND videoId=:videoId");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":videoId", $id);
+			$query->execute();
+			$count = $query->rowCount(); // how many rows are deleted
+
+			$query = $this->con->prepare("INSERT INTO dislikes(username, videoId) VALUES(:username, :videoId)");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":videoId", $id);
+			$query->execute();
+
+			// return data count change to the called(mostly ajax caller js)
+			$result = array(
+				"likes" => 0 - $count,
+				"dislikes" => 1
+			);
+
+			return json_encode($result);
+		}
+	}
+
+	public function wasLikedBy() {
+		$id = $this->getId();
+		$username = $_SESSION["userLoggedIn"];
+
+		$query = $this->con->prepare("SELECT * FROM likes WHERE username=:username AND videoId=:videoId");
+		$query->bindParam(":username", $username);
+		$query->bindParam(":videoId", $id);
+		$query->execute();
+
+		return $query->rowCount() > 0;
+	}
+
+	public function wasDislikedBy() {
+		$id = $this->getId();
+		$username = $_SESSION["userLoggedIn"];
+
+		$query = $this->con->prepare("SELECT * FROM dislikes WHERE username=:username AND videoId=:videoId");
+		$query->bindParam(":username", $username);
+		$query->bindParam(":videoId", $id);
+		$query->execute();
+
+		return $query->rowCount() > 0;
 	}
 }
 ?>

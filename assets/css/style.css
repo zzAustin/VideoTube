@@ -245,3 +245,24 @@ a:hover{
     font-size: 16px;
     flex: 1;
 }
+
+.videoInfo .bottomSection .controls{
+    flex: 1;
+    text-align: right;
+}
+
+.videoInfo .bottomSection .controls button{
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: rgba(17,17,17,0.4);
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.videoInfo .bottomSection .controls img{
+    width: 30px;
+    height: 30px;
+    padding: 4px 8px 8px 4px;
+}

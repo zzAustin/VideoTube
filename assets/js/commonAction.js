@@ -16,3 +16,7 @@ $(document).ready(function(){
 
 	});
 });
+
+function notSignedIn() {
+	alert("You need to sign in to perform this action");
+}
