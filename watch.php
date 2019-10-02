@@ -2,6 +2,7 @@
 <?php require_once("includes/classes/Video.php"); ?>
 <?php require_once("includes/classes/VideoPlayer.php"); ?>
 <?php require_once("includes/classes/VideoInfoSection.php"); ?>
+<?php require_once("includes/classes/CommentSection.php"); ?>
 
 <?php
 if(!isset($_GET["id"])){
@@ -23,6 +24,9 @@ $video->incrementViews();
 
 		$videoInfoSection = new VideoInfoSection($con, $video, $userLoggedInObj);
 		echo $videoInfoSection->create();
+
+		$commentSection = new commentSection($con, $video, $userLoggedInObj);
+		echo $commentSection->create();
 	?>
 </div>
 
