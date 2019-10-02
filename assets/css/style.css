@@ -5,7 +5,7 @@ body {
 	margin:0px;
 }
 
-a:hover{
+a:hover {
 	text-decoration: none
 }
 
@@ -30,7 +30,7 @@ a:hover{
 }
 
 #mastHeadContainer button:not(.searchButton),
-#mastHeadContainer .rightIcons img{
+#mastHeadContainer .rightIcons img {
 	cursor: pointer;
     width: 40px;
     height: 40px;
@@ -115,16 +115,16 @@ a:hover{
     cursor: pointer;
 }
 
-#mastHeadContainer .searchBarContainer .searchButton img{
+#mastHeadContainer .searchBarContainer .searchButton img {
 	height: 20px;
 	width: 20px;
 }
 
-#mastHeadContainer .rightIcons{
+#mastHeadContainer .rightIcons {
 	height: 100%;
 }
 
-/*#mainContentContainer*/ .column{
+/*#mainContentContainer*/ .column {
 	flex-grow: 1;
     background-color: #fff;
     min-height: 300px;
@@ -132,7 +132,7 @@ a:hover{
     box-shadow: rgba(0,0,0,0.1) 0 1px 2px;
 }
 
-.signInContainer{
+.signInContainer {
 	background-color: #efefee;
     height: 100vh;
     display: flex;
@@ -140,11 +140,11 @@ a:hover{
     align-items: center;
 }
 
-.signInContainer .column .header img{
+.signInContainer .column .header img {
 	width: 100px;
 }
 
-.signInContainer .column{
+.signInContainer .column {
 	flex-grow: 0;
 	width: 450px;
 	padding: 20px 35px;
@@ -152,11 +152,11 @@ a:hover{
 	overflow-y: auto; /*only show the scroll bar when needed*/
 }
 
-.signInContainer .column .header{
+.signInContainer .column .header {
 	padding: 20px 0;
 }
 
-.signInContainer .column .header h3{
+.signInContainer .column .header h3 {
 	font-size: 24px;
     font-weight: 400;
     line-height: 32px;
@@ -165,11 +165,11 @@ a:hover{
     padding-top: 6px;
 }
 
-.signInContainer .column .header span{
+.signInContainer .column .header span {
 	font-size: 14px;
 }
 
-.signInContainer .column form{
+.signInContainer .column form {
 	display: flex;
     flex-direction: column;
 }
@@ -183,7 +183,7 @@ a:hover{
     border-bottom: 1px solid #dedede;
 }
 
-.signInContainer .column form input[type="submit"]{
+.signInContainer .column form input[type="submit"] {
 	background-color: #4285f4;
     color: #fff;
     height: 36px;
@@ -195,40 +195,40 @@ a:hover{
     margin-bottom: 20px;
 }
 
-.signInMessage{
+.signInMessage {
 	font-size: 14px;
 	font-weight: 40;
 	color: #212529;
 }
 
-.errorMessage{
+.errorMessage {
 	color: #f00;
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
 }
 
-.watchLeftColumn{
+.watchLeftColumn {
     flex: 1;
 }
 
-.watchLeftColumn .videoPlayer{
+.watchLeftColumn .videoPlayer {
     width: 100%;
 }
 
-.suggestions{
+.suggestions {
     max-width: 425px;
     flex-grow: 1;
     height: 100%;
     padding-left: 24px;
 }
 
-.videoInfo{
+.videoInfo {
     width: 100%;
     padding: 20px 0 8px 0;
 }
 
-.videoInfo h1{
+.videoInfo h1 {
     display: block;
     overflow: hidden;
     font-size: 18px;
@@ -236,22 +236,22 @@ a:hover{
     line-height: 24px;
 }
 
-.videoInfo .bottomSection{
+.videoInfo .bottomSection {
     display: flex;
 }
 
-.videoInfo .bottomSection .viewCount{
+.videoInfo .bottomSection .viewCount {
     color: rgba(17, 17, 17, 0.6);
     font-size: 16px;
     flex: 1;
 }
 
-.videoInfo .bottomSection .controls{
+.videoInfo .bottomSection .controls {
     flex: 1;
     text-align: right;
 }
 
-.videoInfo .bottomSection .controls button{
+.videoInfo .bottomSection .controls button { 
     padding: 0;
     background-color: transparent;
     border: none;
@@ -261,8 +261,82 @@ a:hover{
     cursor: pointer;
 }
 
-.videoInfo .bottomSection .controls img{
+.videoInfo .bottomSection .controls img {
     width: 30px;
     height: 30px;
     padding: 4px 8px 8px 4px;
+}
+
+.secondaryInfo .topRow {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.profilePicture {
+    height: 100%;
+}
+
+.secondaryInfo .topRow .profilePicture {
+    margin-right: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.secondaryInfo .topRow .uploadInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.secondaryInfo .topRow .date {
+    color: rgba(17,17,17, 0.6);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.secondaryInfo .descriptionContainer {
+    margin-left: 64px;
+    max-width: 615px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.secondaryInfo {
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.secondaryInfo .topRow .button {
+    padding: 6px 15px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 2px;
+    border: none;
+    font-size: 14px;
+}
+
+.secondaryInfo .topRow .subscribeButtonContainer,
+.secondaryInfo .topRow .editVideoButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.subscribeButtonContainer .subscribe {
+    background-color: #f00;
+    color: #fff;
+}
+
+.subscribeButtonContainer .unsubscribe {
+    background-color: #eee;
+    color: rgba(17,17,17,0.6);
+}
+
+.editVideoButtonContainer .edit {
+    background-color: #2692e6;
+    color: #fff;
 }

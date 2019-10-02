@@ -46,7 +46,8 @@ class Video{
 	}
 
 	public function getUploadDate() {
-		return $this->sqlData["uploadDate"];
+		$date = $this->sqlData["uploadDate"];
+		return date("M j, Y", strtotime($date)); // $date is a string, date() func is expecting a time var
 	}
 
 	public function getViews() {
