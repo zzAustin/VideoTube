@@ -12,7 +12,7 @@ class CommentControls{
 	// this is to create the video html tag
 	public function create() {
 		$replyButton = $this->createReplyButton();
-		$likesCount = $this->createLikesCount()
+		$likesCount = $this->createLikesCount();
 		$likeButton = $this->createLikeButton();
 		$dislikeButton = $this->createDislikeButton();
 		$replySection = $this->createReplySection();
@@ -43,35 +43,35 @@ class CommentControls{
 	}
 
 	private function createLikeButton() {
-		$text = $this->video->getLikes();
-		$videoId = $this->video->getId();
-		$action = "likeVideo(this, $videoId)";
+		$commentId = $this->comment->getId();
+		$videoId = $this->comment->getVideoId();
+		$action = "likeComment($commentId, this, $videoId)";
 		$class = "likeButton";
 		$imgSrc = "assets/images/icons/thumb-up.png";
 
-		if($this->video->wasLikedBy()){
+		if($this->comment->wasLikedBy()){
 			$imgSrc = "assets/images/icons/thumb-up-active.png";
 		}
 
 		// change img if the video is already liked
 
-		return ButtonProvider::createButton($text, $imgSrc, $action, $class);
+		return ButtonProvider::createButton("", $imgSrc, $action, $class);
 	}
 
 	private function createDislikeButton() {
-		$text = $this->video->getDislikes();
-		$videoId = $this->video->getId();
-		$action = "dislikeVideo(this, $videoId)";
+		$commentId = $this->comment->getId();
+		$videoId = $this->comment->getVideoId();
+		$action = "dislikeComment($commentId, this, $videoId)";
 		$class = "dislikeButton";
 		$imgSrc = "assets/images/icons/thumb-down.png";
 
-		if($this->video->wasDislikedBy()){
+		if($this->comment->wasDislikedBy()){
 			$imgSrc = "assets/images/icons/thumb-down-active.png";
 		}
 
 		// change img if the video is already liked
 
-		return ButtonProvider::createButton($text, $imgSrc, $action, $class);
+		return ButtonProvider::createButton("", $imgSrc, $action, $class);
 	}
 }
 ?>
