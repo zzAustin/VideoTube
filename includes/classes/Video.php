@@ -197,7 +197,7 @@ class Video{
 	}
 
 	public function getNumberOfComments() {
-		$query = $this->con->prepare("SELECT * FROM comments WHERE videoId=:videoId AND responseTo=0 ORDER BY datePosted DESC");
+		$query = $this->con->prepare("SELECT * FROM comments WHERE videoId=:videoId");
 		$query->bindParam(":videoId", $id);
 		$id = $this->getId();
 		$query->execute();
@@ -206,7 +206,7 @@ class Video{
 	}
 
 	public function getComments() {
-		$query = $this->con->prepare("SELECT * FROM comments WHERE videoId=:videoId");
+		$query = $this->con->prepare("SELECT * FROM comments WHERE videoId=:videoId AND responseTo=0 ORDER BY datePosted DESC");
 		$query->bindParam(":videoId", $id);
 		$id = $this->getId();
 		$query->execute();

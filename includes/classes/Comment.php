@@ -64,7 +64,7 @@ class Comment {
 	}
 
 	public function getNumberOfReplies() {
-		$query = $this->con->prepare("SELECT count(* ) FROM comments WHERE responseTo=':responseTo'");
+		$query = $this->con->prepare("SELECT count(*) FROM comments WHERE responseTo= :responseTo");
 		$query->bindParam(":responseTo", $id);
 		$id = $this->sqlData["id"];
 		$query->execute();
@@ -213,6 +213,23 @@ class Comment {
 			// return data count change to the called(mostly ajax caller js)
 			return -1 - $count; //-1: 1 dislike -$count: dinminish the like count
 		}
+	}
+
+	public function getReplies() {
+		$query = $this->con->prepare("SELECT * FROM comments WHERE responseTo=:commentId ORDER BY datePosted ASC");
+		$query->bindParam(":commentId", $id);
+		$id = $this->getId();
+		$query->execute();
+
+		$comments = "";
+		$videoId = $this->getVideoId();
+
+		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+			$comment = new Comment($this->con, $row, $this->userLoggedInObj, $videoId);
+			$comments .= $comment->create();
+		}
+
+		return $comments;
 	}
 
 }
