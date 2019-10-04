@@ -1,4 +1,5 @@
 <?php require_once("includes/header.php"); ?>
+<?php require_once("includes/classes/Comment.php"); ?>
 <?php require_once("includes/classes/Video.php"); ?>
 <?php require_once("includes/classes/VideoPlayer.php"); ?>
 <?php require_once("includes/classes/VideoInfoSection.php"); ?>
