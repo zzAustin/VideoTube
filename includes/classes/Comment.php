@@ -150,5 +150,70 @@ class Comment {
 		return $numLikes - $numDislikes;
 
 	}
+
+	public function like() {
+		$id = $this->getId();
+		$username = $_SESSION["userLoggedIn"];
+
+		if($this->wasLikedBy()) {
+			// user has already liked
+			$query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND commentId=:commentId");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":commentId", $id);
+			$query->execute();
+
+			// the page will actually display negative values
+			return -1;
+		}
+		else {
+			// user has not liked
+			$query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username AND commentId=:commentId");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":commentId", $id);
+			$query->execute();
+			$count = $query->rowCount(); // how many rows are deleted
+
+			$query = $this->con->prepare("INSERT INTO likes(username, commentId) VALUES(:username, :commentId)");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":commentId", $id);
+			$query->execute();
+
+			// return data count change to the called(mostly ajax caller js)
+			return 1 + $count; // 1: 1 like $count:diminish dislike count
+		}
+	}
+
+	public function dislike() {
+		$id = $this->getId();
+		$username = $_SESSION["userLoggedIn"];
+
+		if($this->wasDislikedBy()) {
+			// user has already dsiliked
+			$query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username AND commentId=:commentId");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":commentId", $id);
+			$query->execute();
+
+			// return data count change to the called(mostly ajax caller js)
+			return 1;
+		}
+		else {
+			// user has not disliked
+			$query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND commentId=:commentId");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":commentId", $id);
+			$query->execute();
+			$count = $query->rowCount(); // how many rows are deleted
+
+			$query = $this->con->prepare("INSERT INTO dislikes(username, commentId) VALUES(:username, :commentId)");
+			$query->bindParam(":username", $username);
+			$query->bindParam(":commentId", $id);
+			$query->execute();
+
+			// return data count change to the called(mostly ajax caller js)
+			return -1 - $count; //-1: 1 dislike -$count: dinminish the like count
+		}
+	}
+
 }
 ?>
