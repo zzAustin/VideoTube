@@ -1,37 +1,37 @@
 html,
 body {
-	height:100%;
-	padding:0px;
-	margin:0px;
+    height:100%;
+    padding:0px;
+    margin:0px;
 }
 
 a:hover {
-	text-decoration: none
+    text-decoration: none
 }
 
 #pageContainer {
-	width: 100%;
+    width: 100%;
     height: 100%;
     background-color: #fafafa;
 }
 
 #mastHeadContainer {
-	width:100%;
-	height:56px;
-	position:fixed;
-	top: 0;
-	left: 0;
-	padding: 7px 16px;
-	box-sizing: border-box;
-	border-bottom: 1px solid #e8e8e8;
-	z-index: 1;
-	display: flex;
-	align-items: center;
+    width:100%;
+    height:56px;
+    position:fixed;
+    top: 0;
+    left: 0;
+    padding: 7px 16px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e8e8e8;
+    z-index: 1;
+    display: flex;
+    align-items: center;
 }
 
 #mastHeadContainer button:not(.searchButton),
 #mastHeadContainer .rightIcons img {
-	cursor: pointer;
+    cursor: pointer;
     width: 40px;
     height: 40px;
     padding: 8px;
@@ -41,20 +41,20 @@ a:hover {
 }
 
 #mastHeadContainer button img {
-	width: 100%; 
+    width: 100%; 
 }
 
 #mastHeadContainer .logoContainer {
-	width: 150px;
+    width: 150px;
 }
 
 #mastHeadContainer .logoContainer img {
-	height: 25px;
+    height: 25px;
     margin-left: 8px;
 }
  
 #sideNavContainer {
-	width: 240px;
+    width: 240px;
     background-color: #f5f5f5;
     padding-top: 56px; /*this is taken from the height of #mastHeadContainer*/
     position: fixed;
@@ -65,22 +65,22 @@ a:hover {
 }
 
 #mainSectionContainer {
-	padding-top: 56px;
-	display: flex;
+    padding-top: 56px;
+    display: flex;
 }
 
 #mainSectionContainer.leftPadding {
-	padding-left: 240px;
+    padding-left: 240px;
 }
 
 #mainContentContainer {
-	padding:10px 30px;
-	display: flex;
+    padding:10px 30px;
+    display: flex;
     flex: 1;
 }
 
 .searchBarContainer {
-	margin: 0 40px;
+    margin: 0 40px;
     flex: 1; /*for now i think this is saying it this element will take up all available space of the parent, by available means it will not obsure other elements*/
     display: flex;
 }
@@ -91,7 +91,7 @@ a:hover {
 }
 
 #mastHeadContainer .searchBarContainer .searchBar {
-	flex: 1;
+    flex: 1;
     max-width: 600px;
     color: #111; /*font color*/
     padding: 2px 6px; /*padding for the text*/
@@ -106,7 +106,7 @@ a:hover {
 }
 
 #mastHeadContainer .searchBarContainer .searchButton {
-	height: 32px;
+    height: 32px;
     width: 65px;
     border: 1px solid #d3d3d3;
     background-color: #f8f8f8;
@@ -116,16 +116,16 @@ a:hover {
 }
 
 #mastHeadContainer .searchBarContainer .searchButton img {
-	height: 20px;
-	width: 20px;
+    height: 20px;
+    width: 20px;
 }
 
 #mastHeadContainer .rightIcons {
-	height: 100%;
+    height: 100%;
 }
 
 /*#mainContentContainer*/ .column {
-	flex-grow: 1;
+    flex-grow: 1;
     background-color: #fff;
     min-height: 300px;
     padding: 20px;
@@ -133,7 +133,7 @@ a:hover {
 }
 
 .signInContainer {
-	background-color: #efefee;
+    background-color: #efefee;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -141,23 +141,23 @@ a:hover {
 }
 
 .signInContainer .column .header img {
-	width: 100px;
+    width: 100px;
 }
 
 .signInContainer .column {
-	flex-grow: 0;
-	width: 450px;
-	padding: 20px 35px;
-	max-height: 100%;
-	overflow-y: auto; /*only show the scroll bar when needed*/
+    flex-grow: 0;
+    width: 450px;
+    padding: 20px 35px;
+    max-height: 100%;
+    overflow-y: auto; /*only show the scroll bar when needed*/
 }
 
 .signInContainer .column .header {
-	padding: 20px 0;
+    padding: 20px 0;
 }
 
 .signInContainer .column .header h3 {
-	font-size: 24px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 32px;
     margin: 0;
@@ -166,11 +166,11 @@ a:hover {
 }
 
 .signInContainer .column .header span {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .signInContainer .column form {
-	display: flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -184,7 +184,7 @@ a:hover {
 }
 
 .signInContainer .column form input[type="submit"] {
-	background-color: #4285f4;
+    background-color: #4285f4;
     color: #fff;
     height: 36px;
     width: 88px;
@@ -196,16 +196,16 @@ a:hover {
 }
 
 .signInMessage {
-	font-size: 14px;
-	font-weight: 40;
-	color: #212529;
+    font-size: 14px;
+    font-weight: 40;
+    color: #212529;
 }
 
 .errorMessage {
-	color: #f00;
-	font-size: 14px;
-	font-weight: 400;
-	text-align: center;
+    color: #f00;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
 }
 
 .watchLeftColumn {
@@ -354,7 +354,9 @@ a:hover {
     flex-direction: column
 }
 
-.commentSection .header .commentForm .profilePicture {
+.commentSection .header .commentForm .profilePicture,
+.commentSection .comment .profilePicture,
+.commentForm .profilePicture {
     margin-right: 16px;
     width: 48px;
     height: 48px;
@@ -365,11 +367,13 @@ a:hover {
     margin-bottom: 24px;
 }
 
-.commentSection .header .commentForm {
+.commentSection .header .commentForm,
+.itemContainer .commentForm {
     display: flex;
 }
 
-.commentSection .header .commentForm textarea {
+.commentSection .header .commentForm textarea,
+.itemContainer .commentForm textarea {
     flex: 1;
     border: none;
     background-color: transparent;
@@ -378,7 +382,9 @@ a:hover {
     resize: none;
 }
 
-.commentSection .header .commentForm .postComment {
+.commentSection .header .commentForm .postComment,
+.itemContainer .commentForm .postComment,
+.itemContainer .commentForm .cancelComment {
     height: 36px;
     background-color: #2692e6;
     color: #fff;
@@ -386,4 +392,80 @@ a:hover {
     border: none;
     padding: 0 15px;
     border-radius: 2px;
+}
+
+.itemContainer .commentForm .cancelComment {
+    background-color:transparent;
+    color: rgba(17,17,17,0.6)
+}
+
+.itemContainer .commentForm .cancelComment:hover {
+    color: rgb(0,0,0);
+}
+
+.commentSection .itemContainer {
+    margin-bottom: 16px;
+}
+
+.commentSection .comment {
+    display: flex;
+}
+
+.commentSection .commentHeader {
+    margin-bottom: 2px;
+}
+
+.commentSection .comment .username {
+    margin-right: 8px;
+    color: #111;
+    font-size: 13px;
+    font-weight:500;
+}
+
+.commentSection .comment .body {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.itemContainer .controls {
+    margin-left: 64px
+}
+
+.itemContainer .controls button,
+.itemContainer .controls .likesCount {
+    height: 32px;
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(17, 17, 17, 0.6);
+}
+
+.itemContainer .controls .likesCount {
+    cursor: pointer;
+}
+
+.itemContainer .controls .likesCount {
+    margin:0 5px;
+}
+
+.itemContainer .controls button img {
+    height: 16px;
+}
+
+.itemContainer .commentForm .profilePicture {
+    width:30px;
+    height:30px;
+}
+
+.commentSection .comment .timestamp {
+    color: #888;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.hidden {
+    display: none !important;
 }
