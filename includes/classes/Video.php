@@ -50,6 +50,11 @@ class Video{
 		return date("M j, Y", strtotime($date)); // $date is a string, date() func is expecting a time var
 	}
 
+	public function getTimeStamp() {
+		$date = $this->sqlData["uploadDate"];
+		return date("M jS, Y", strtotime($date)); // with th like Oct 4th
+	}
+
 	public function getViews() {
 		return $this->sqlData["views"];
 	}
@@ -219,6 +224,15 @@ class Video{
 		}
 
 		return $comments;
+	}
+
+	public function getThumbnail() {
+		$query = $this->con->prepare("SELECT filePath FROM thumbnails WHERE videoId=:videoId AND selected=1");
+		$query->bindParam(":videoId", $videoId);
+		$videoId = $this->getId();
+		$query->execute();
+
+		return $query->fetchColumn();
 	}
 }
 ?>
