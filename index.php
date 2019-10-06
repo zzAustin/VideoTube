@@ -17,8 +17,8 @@
 		$subscriptionVideos = $subscriptionsProvider->getVideos();
 
 		$videoGrid = new VideoGrid($con, $userLoggedInObj->getUsername());
-		if(User::isLoggedIn()) {
-			
+		if(User::isLoggedIn() && sizeof($subscriptionVideos) > 0) {		
+			echo $videoGrid->create($subscriptionVideos, "Subscriptions", false);
 		}
 
 		echo $videoGrid->create(null, "Recommended", false);

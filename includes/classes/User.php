@@ -71,9 +71,9 @@ class User{
 		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
 			$user = new User($this->con, $row["userTo"]);
 			array_push($subs, $user);
-			return $subs;
-
 		}
+
+		return $subs;
 	}
 }
 ?>

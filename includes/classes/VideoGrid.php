@@ -14,7 +14,7 @@ class VideoGrid {
 			$girdItems = $this->generateItems();
 		}
 		else {
-			$girdItems = $this->generateItemsFromVideos();
+			$girdItems = $this->generateItemsFromVideos($videos);
 		}
 
 		$header = "";
@@ -43,13 +43,41 @@ class VideoGrid {
 		return $elementsHtml;
 	}
 
-	public function generateItemsFromVideos() {
-		
+	public function generateItemsFromVideos($videos) {
+		$elementsHtml = "";
+
+		foreach($videos as $video) {
+			$item = new VideoGridItem($video, $this->largeMode);
+			$elementsHtml .= $item->create();
+		}
+
+		return $elementsHtml;
 	}
 
 	public function createGridHeader($title, $showFilter) {
 		$filter = "";
 		//create filter
+		if($showFilter) {
+			$link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+			$urlArray = parse_url($link);
+			$query = $urlArray["query"];
+			parse_str($query, $params);
+
+			unset($params["orderBy"]);
+
+			$newQuery = http_build_query($params);
+			$newUrl = basename($_SERVER["PHP_SELF"]) . "?" . $newQuery;
+
+			$filter = "<div class='videoGridHeader'>
+							<span>Order by:</span>
+							<a href='$newUrl&orderBy=uploadDate'>Upload date</a>
+							<a href='$newUrl&orderBy=views'>Most viewed</a>
+
+						</div>";
+		}
+
+
 
 		return "<div class='videoGridHeader'>
 						<div class='left'>
@@ -57,6 +85,13 @@ class VideoGrid {
 						</div>
 						$filter
 				</div>";
+	}
+
+	public function createLarge($videos, $title, $showFilter) {
+		$this->gridClass .= " large";
+		$this->largeMode = true;
+		return $this->create($videos, $title, $showFilter);
+
 	}
 }
 ?>

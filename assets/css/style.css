@@ -77,7 +77,7 @@ a:hover {
     padding:10px 30px;
     display: flex;
     flex: 1;
-    background-color: #fafafa
+    background-color: #fafafa;
     box-sizing: border-box;
 }
 
@@ -494,6 +494,7 @@ a:hover {
 }
 
 .videoGridItem {
+    height: 200px;
     margin-right: 4px;
     margin-bottom: 24px;
 }
